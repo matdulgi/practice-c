@@ -36,19 +36,43 @@ void MakeRightSubTree(BTreeNode * main, BTreeNode * sub){
     main->right = sub;
 }
 
-//pass visitFunc dinamycally in caller 
+//pass VisitFunc dinamycally in caller 
+//VisicFunc ditermine what to do at Node
 typedef void (*VisitFuncPtr)(BTData data);
 
 void PreorderTraverse(BTreeNode * bt, VisitFuncPtr action){
-    if( (*bt) == NULL){
-
+    if( bt == NULL){
+        return;
     }
+    action(bt->data);
+    PreorderTraverse(bt->left, action);
+    PreorderTraverse(bt->right, action);
 }
 
+//passed bt is leftmost Node?? root Node?
 void InorderTraverse(BTreeNode * bt, VisitFuncPtr action){
-
+    if( bt == NULL){
+        return;
+    }
+    InorderTraverse(bt->left, action);
+    action(bt->data);
+    InorderTraverse(bt->right, action);
 }
 
 void PostorderTraverse(BTreeNode * bt, VisitFuncPtr action){
+    if( bt == NULL){
+        return;
+    }
+    InorderTraverse(bt->left, action);
+    InorderTraverse(bt->right, action);
+    action(bt->data);
+}
 
+void DeleteTree(BTreeNode * bt){
+    if( bt == NULL){
+        return;
+    }
+    DeleteTree(bt->left);
+    DeleteTree(bt->right);
+    free(bt);
 }
