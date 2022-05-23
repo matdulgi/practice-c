@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main (void){
+  int* ptr = (int*)malloc(sizeof(int));
+  *ptr = 1;
+  *(ptr + 1) = 2;
+  *(ptr + 2) = 3;
+
+  printf("%d, %d", *ptr ,ptr)
+
+
+
+  return 0;
+}
