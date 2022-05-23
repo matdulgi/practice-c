@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 
-void NullCheck (int * ptr){
+void nullCheck (int * ptr){
     if (ptr == NULL){
         printf("null\n");
     } else{
@@ -11,14 +11,18 @@ void NullCheck (int * ptr){
 }
 
 int main (void){
-    int * ptr1 = (int*)malloc(sizeof(int));
-    int * ptr2 = malloc(sizeof(int));
+  //don't forget initializing
+    int * ptr1 = NULL;
+    int * ptr2 = NULL;
+    nullCheck(ptr1);
+    ptr1 = (int*)malloc(sizeof(int));
+    ptr2 = malloc(sizeof(int));
+    *ptr1 = 3;
 
-    NullCheck(ptr1);
+    nullCheck(ptr1);
 
     free(ptr1);
 
-    NullCheck(ptr1);
+    nullCheck(ptr1);
 
-    return 0;
 }
